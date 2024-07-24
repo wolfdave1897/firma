@@ -1,12 +1,31 @@
-<div style="font-family: Verdana; color: #000;">
-    <p>Saludos cordiales,</p>
-    <p><strong>Tu Nombre</strong></p>
-    <p>Tu Posición</p>
-    <p>Tu Empresa</p>
-    <p>Tel: <a href="tel:+1234567890">+1234567890</a></p>
-    <p>Email: <a href="mailto:tuemail@ejemplo.com">tuemail@ejemplo.com</a></p>
-    <p><a href="http://www.tusitio.com">www.tusitio.com</a></p>
-    <p>
-        <img src="https://drive.google.com/uc?id=1kc1bjbMbtVhKeMn9C95HeVS92gs3EIEy" alt="Firma" style="width: 200px; height: auto;">
-    </p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+        }
+        .signature {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+        .signature img {
+            max-width: 150px; /* Ajusta el tamaño según necesites */
+            height: auto;
+        }
+        .signature p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="signature">
+        <img src="https://rawcdn.githack.com/wolfdave1897/frima/ccdd81f9a3fb64491ca41a819a2aebf300114c56/juan%20pedro.html" alt="Firma Juan Pedro">
+        <p><strong>Juan Pedro</strong></p>
+        <p>Tu Cargo</p>
+        <p>Tu Empresa</p>
+        <p><a href="mailto:tuemail@ejemplo.com">tuemail@ejemplo.com</a></p>
+        <p><a href="https://tuempresa.com">www.tuempresa.com</a></p>
+    </div>
+</body>
+</html>
