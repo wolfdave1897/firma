@@ -7,10 +7,10 @@
         }
         .signature {
             padding: 10px;
-            border-top: 1px solid #ccc;
+            max-width: 600px; /* Ajusta el tamaño según sea necesario */
         }
         .signature img {
-            max-width: 150px; /* Ajusta el tamaño según necesites */
+            max-width: 100%; /* Asegura que la imagen se ajuste al contenedor */
             height: auto;
         }
         .signature p {
@@ -20,7 +20,7 @@
 </head>
 <body>
     <div class="signature">
-        <img src="https://rawcdn.githack.com/wolfdave1897/frima/ccdd81f9a3fb64491ca41a819a2aebf300114c56/juan%20pedro.html" alt="Firma Juan Pedro">
+        <img src="https://rawcdn.githack.com/wolfdave1897/frima/9877a53bbd09e6d6fd9c7eb01a4149fc8edc298b/juan%20pedro.html" alt="Firma Juan Pedro">
         <p><strong>Juan Pedro</strong></p>
         <p>Tu Cargo</p>
         <p>Tu Empresa</p>
