@@ -1,17 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>Firma HTML</title>
     <style>
+        body {
+            font-family: Verdana, sans-serif;
+            color: #333;
+        }
+        .signature-container {
+            width: 100%;
+            max-width: 600px;
+        }
+        .signature {
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        .signature img {
+            max-width: 100px;
+            height: auto;
+        }
+        .signature h1 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+        .signature p {
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
-    <div class="signature">
-        <img src="https://drive.google.com/file/d/1kc1bjbMbtVhKeMn9C95HeVS92gs3EIEy/view?usp=sharing" alt="Firma Juan Pedro">
-        <p><strong>Juan Pedro</strong></p>
-        <p>Tu Cargo</p>
-        <p>Tu Empresa</p>
-        <p><a href="mailto:tuemail@ejemplo.com">tuemail@ejemplo.com</a></p>
-        <p><a href="https://tuempresa.com">www.tuempresa.com</a></p>
+    <div class="signature-container">
+        <div class="signature">
+            <img src="URL_DE_TU_IMAGEN" alt="Logo">
+            <h1>Juan Pedro</h1>
+            <p>Tu cargo aquí</p>
+            <p>Tu empresa aquí</p>
+            <p>Tel: +123 456 7890</p>
+            <p>Email: <a href="mailto:juan.pedro@example.com">juan.pedro@example.com</a></p>
+            <p><a href="https://drive.google.com/file/d/1kc1bjbMbtVhKeMn9C95HeVS92gs3EIEy/view?usp=sharing">Descargar archivo</a></p>
+        </div>
     </div>
 </body>
 </html>
