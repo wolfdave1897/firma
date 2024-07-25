@@ -5,9 +5,8 @@
     <style>
         body {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: flex-start;
-            flex-direction: column;
             height: 100vh;
             margin: 0;
             font-family: Verdana, sans-serif; /* Fuente Verdana */
@@ -18,22 +17,22 @@
             box-sizing: border-box;
         }
         .container {
-            text-align: center;
+            display: flex;
+            align-items: flex-start;
             width: 100%;
         }
         .container img {
-            width: 50%; /* Ancho de la imagen */
+            width: 25%; /* Ancho de la imagen */
             height: auto;
             max-width: 100%;
             border-radius: 0; /* Sin bordes redondeados de la imagen */
-            display: block;
-            margin: 0 auto; /* Centrar la imagen */
+            margin-right: 20px; /* Espacio entre la imagen y el texto */
         }
         .container p {
             font-size: 0.9em; /* Tamaño de fuente del párrafo */
             color: #333333; /* Gris oscuro para el texto del párrafo */
             text-align: justify; /* Justificar el texto */
-            margin-top: 20px; /* Margen superior del párrafo */
+            margin: 0; /* Sin margen adicional */
         }
     </style>
 </head>
