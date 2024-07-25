@@ -6,21 +6,20 @@
         body {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            flex-direction: column;
             height: 100vh;
             margin: 0;
             font-family: Verdana, sans-serif; /* Fuente Verdana */
             color: #333333; /* Gris oscuro para el texto */
             font-size: 1em; /* Tamaño de fuente base */
             background-color: #ffffff; /* Fondo blanco */
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
             text-align: center;
-            border: 1px solid transparent; /* Sin borde visible */
-            padding: 20px;
-            box-shadow: none; /* Sin sombra */
-            border-radius: 0; /* Sin bordes redondeados */
-            background-color: transparent; /* Sin fondo */
+            width: 100%;
         }
         .container img {
             width: 50%; /* Ancho de la imagen */
@@ -33,7 +32,7 @@
         .container p {
             font-size: 0.9em; /* Tamaño de fuente del párrafo */
             color: #333333; /* Gris oscuro para el texto del párrafo */
-            text-align: center; /* Centrar el texto */
+            text-align: justify; /* Justificar el texto */
             margin-top: 20px; /* Margen superior del párrafo */
         }
     </style>
