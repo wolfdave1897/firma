@@ -17,8 +17,8 @@
             box-sizing: border-box;
         }
         .container {
-            text-align: center;
             width: 100%;
+            max-width: 600px; /* Ajustar el ancho máximo del contenedor */
         }
         .container img {
             width: 25%; /* Ancho de la imagen */
@@ -26,13 +26,14 @@
             max-width: 100%;
             border-radius: 0; /* Sin bordes redondeados de la imagen */
             display: block;
-            margin: 0 auto; /* Centrar la imagen */
+            margin-left: 0; /* Imagen alineada a la izquierda */
+            margin-bottom: 20px; /* Margen inferior para separación con el texto */
         }
         .container p {
             font-size: 0.9em; /* Tamaño de fuente del párrafo */
             color: #333333; /* Gris oscuro para el texto del párrafo */
             text-align: justify; /* Justificar el texto */
-            margin-top: 20px; /* Margen superior del párrafo */
+            margin: 0; /* Sin margen adicional */
         }
     </style>
 </head>
