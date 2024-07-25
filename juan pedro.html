@@ -11,37 +11,45 @@
             margin: 0;
             background-color: #ffffff; /* Fondo blanco */
             font-family: Verdana, sans-serif; /* Fuente Verdana */
-            color: #000000; /* Color negro para el texto */
+            color: #333333; /* Color gris oscuro para el texto */
             font-size: 1em; /* Tamaño de fuente base */
         }
         .container {
-            text-align: center;
-            border: 1.5px solid #0056b3; /* Borde azul */
+            display: flex;
+            align-items: center;
             padding: 30px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 13px; /* Bordes redondeados */
-            background-color: #f9f9f9; /* Fondo ligeramente gris */
+            border: none; /* Sin borde */
+            box-shadow: none; /* Sin sombra */
+            border-radius: 0; /* Sin bordes redondeados */
+            background-color: transparent; /* Fondo transparente */
         }
         .container img {
             width: 50%; /* Ancho de la imagen */
             height: auto;
             max-width: 100%;
-            border-radius: 13px; /* Bordes redondeados de la imagen */
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Sombra en la imagen */
+            border-radius: 0; /* Sin bordes redondeados en la imagen */
+            box-shadow: none; /* Sin sombra en la imagen */
+            margin-left: 20px; /* Espacio entre la imagen y el texto */
         }
-        .container p {
-            margin-top: 20px; /* Margen superior del párrafo */
+        .text {
+            text-align: left;
+            max-width: 50%;
+        }
+        .text p {
+            margin-top: 0; /* Sin margen superior en el párrafo */
             font-size: 0.9em; /* Tamaño de fuente del párrafo */
-            color: #d35400; /* Color naranja oscuro para el texto del párrafo */
-            text-align: justify;
+            color: #333333; /* Color gris oscuro para el texto del párrafo */
+            line-height: 1.5; /* Espaciado entre líneas */
         }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <div class="text">
+        <p>AVISO IMPORTANTE: Este correo electrónico y/o el material adjunto son para uso exclusivo de la persona o la entidad a la que expresamente se le ha enviado y puede contener información confidencial o material privilegiado. Si usted no es el destinatario legítimo del mismo, por favor repórtelo inmediatamente al remitente del correo o bórrelo. Cualquier revisión, retransmisión, difusión o cualquier otro uso de este correo, por personas o entidades distintas a las del destinatario legítimo, queda expresamente prohibida. Este correo electrónico no pretende ni debe ser considerado como constitutivo de ninguna relación legal, contractual o de otra índole similar.</p>
+    </div>
     <img src="https://i.postimg.cc/Xv1cMFyB/Juan-Pedro-Mart-nez.jpg" alt="Juan Pedro Martínez">
-    <p>AVISO IMPORTANTE: Este correo electrónico y/o el material adjunto son para uso exclusivo de la persona o la entidad a la que expresamente se le ha enviado y puede contener información confidencial o material privilegiado. Si usted no es el destinatario legítimo del mismo, por favor repórtelo inmediatamente al remitente del correo o bórrelo. Cualquier revisión, retransmisión, difusión o cualquier otro uso de este correo, por personas o entidades distintas a las del destinatario legítimo, queda expresamente prohibida. Este correo electrónico no pretende ni debe ser considerado como constitutivo de ninguna relación legal, contractual o de otra índole similar.</p>
 </div>
 
 </body>
