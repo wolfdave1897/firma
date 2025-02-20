@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hora y Clima - México y Chaco, Argentina</title>
+    <title>Hora y Clima - México y Argentina</title>
     <style>
         * {
             margin: 0;
@@ -13,18 +13,23 @@
         }
 
         body {
-            background-color: #f0f0f0;
+            background-image: url('https://i.imgur.com/WY2TklL.jpg'); /* Tu imagen de fondo desde Imgur */
+            background-size: cover; /* Cubre toda la pantalla */
+            background-position: center; /* Centra la imagen */
+            background-repeat: no-repeat; /* Evita que se repita */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             text-align: center;
+            color: white; /* Texto en blanco para contrastar con el fondo */
         }
 
         h1 {
             margin-bottom: 20px;
             font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para el texto */
         }
 
         .container {
@@ -39,6 +44,7 @@
             width: 300px;
             padding: 20px;
             border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
             color: black;
             font-size: 1.2rem;
             text-align: center;
@@ -56,34 +62,30 @@
     </style>
 
     <script>
-        // Clave de API de TimeZoneDB (puedes obtener una gratuita en https://timezonedb.com/api)
-        const TIMEZONEDB_API_KEY = "TU_API_KEY"; // Reemplaza con tu clave de API
-
         async function getData() {
             try {
-                // Obtener hora y fecha para México
-                const mexicoTimeRes = await fetch(
-                    `https://api.timezonedb.com/v2.1/get-time-zone?key=${TIMEZONEDB_API_KEY}&format=json&by=zone&zone=America/Mexico_City`
-                );
+                // Obtener la hora actual de México
+                const mexicoTimeRes = await fetch("https://worldtimeapi.org/api/timezone/America/Mexico_City");
                 const mexicoTime = await mexicoTimeRes.json();
 
-                // Obtener hora y fecha para Chaco, Argentina
-                const chacoTimeRes = await fetch(
-                    `https://api.timezonedb.com/v2.1/get-time-zone?key=${TIMEZONEDB_API_KEY}&format=json&by=zone&zone=America/Argentina/Cordoba` // Chaco usa la zona horaria de Córdoba
-                );
-                const chacoTime = await chacoTimeRes.json();
+                // Obtener la hora actual de México en formato Date
+                const mexicoFecha = new Date(mexicoTime.utc_datetime);
+
+                // Calcular la hora de Argentina sumando 3 horas
+                const argentinaFecha = new Date(mexicoFecha);
+                argentinaFecha.setHours(argentinaFecha.getHours() + 3);
+
+                // Formatear la hora en formato local
+                const mexicoHora = mexicoFecha.toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+                const argentinaHora = argentinaFecha.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 
                 // Obtener clima para México
                 const mexicoWeatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=19.43&longitude=-99.13&current_weather=true");
                 const mexicoWeather = await mexicoWeatherRes.json();
 
-                // Obtener clima para Chaco
+                // Obtener clima para Chaco (usando las coordenadas de Resistencia, Chaco)
                 const chacoWeatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=-27.46&longitude=-58.98&current_weather=true");
                 const chacoWeather = await chacoWeatherRes.json();
-
-                // Formatear la hora local
-                const mexicoHora = new Date(mexicoTime.formatted).toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-                const chacoHora = new Date(chacoTime.formatted).toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 
                 // Mostrar los datos en la página
                 document.getElementById("mexico").innerHTML = `
@@ -94,7 +96,7 @@
 
                 document.getElementById("argentina").innerHTML = `
                     <h2>Resistencia, Chaco 🇦🇷</h2>
-                    <p><strong>Hora:</strong> ${chacoHora}</p>
+                    <p><strong>Hora:</strong> ${argentinaHora}</p>
                     <p><strong>Temperatura:</strong> ${chacoWeather.current_weather.temperature}°C</p>
                 `;
             } catch (error) {
