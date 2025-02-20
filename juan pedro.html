@@ -3,29 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>firma</title>
+    <title>Hora y Clima - México y Argentina</title>
     <style>
-        body {
-            font-family: Verdana, sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-        img {
-            display: block;
+
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
             margin-bottom: 20px;
-            width: 50%;
+            font-size: 2rem;
         }
-        .aviso {
-            color: #4a4a4a;
-            font-size: 14px;
-            line-height: 1.5;
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .box {
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid white;
+        }
+
+        #mexico {
+            background: linear-gradient(to bottom, #006847, #ffffff, #ce1126);
+            color: black;
+        }
+
+        #argentina {
+            background: linear-gradient(to bottom, #74ACDF, #ffffff, #74ACDF);
+            color: black;
         }
     </style>
+
+    <script>
+        async function getData() {
+            try {
+                const mexicoTimeRes = await fetch("https://worldtimeapi.org/api/timezone/America/Mexico_City");
+                const chacoTimeRes = await fetch("https://worldtimeapi.org/api/timezone/America/Argentina/Salta");
+                const mexicoWeatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=19.43&longitude=-99.13&current_weather=true");
+                const chacoWeatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=-27.46&longitude=-58.98&current_weather=true");
+
+                const mexicoTime = await mexicoTimeRes.json();
+                const chacoTime = await chacoTimeRes.json();
+                const mexicoWeather = await mexicoWeatherRes.json();
+                const chacoWeather = await chacoWeatherRes.json();
+
+                const mexicoHora = new Date(mexicoTime.datetime).toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+                const chacoHora = new Date(chacoTime.datetime).toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+
+                document.getElementById("mexico").innerHTML = `
+                    <h2>Ciudad de México 🇲🇽</h2>
+                    <p><strong>Hora:</strong> ${mexicoHora}</p>
+                    <p><strong>Temperatura:</strong> ${mexicoWeather.current_weather.temperature}°C</p>
+                `;
+
+                document.getElementById("argentina").innerHTML = `
+                    <h2>Resistencia, Chaco 🇦🇷</h2>
+                    <p><strong>Hora:</strong> ${chacoHora}</p>
+                    <p><strong>Temperatura:</strong> ${chacoWeather.current_weather.temperature}°C</p>
+                `;
+            } catch (error) {
+                console.error("Error obteniendo datos:", error);
+            }
+        }
+    </script>
 </head>
-<body>
-    <img src="https://i.postimg.cc/Xv1cMFyB/Juan-Pedro-Mart-nez.jpg" alt="Juan Pedro Martínez">
-    <p class="aviso">
-        AVISO IMPORTANTE: Este correo electrónico y/o el material adjunto son para uso exclusivo de la persona o la entidad a la que expresamente se le ha enviado y puede contener información confidencial o material privilegiado. Si usted no es el destinatario legítimo del mismo, por favor repórtelo inmediatamente al remitente del correo o bórrelo. Cualquier revisión, retransmisión, difusión o cualquier otro uso de este correo, por personas o entidades distintas a las del destinatario legítimo, queda expresamente prohibida. Este correo electrónico no pretende ni debe ser considerado como constitutivo de ninguna relación legal, contractual o de otra índole similar.
-    </p>
+<body onload="getData()">
+    <h1>Hora y Clima en México y Argentina</h1>
+    <div class="container">
+        <div id="mexico" class="box">Cargando...</div>
+        <div id="argentina" class="box">Cargando...</div>
+    </div>
 </body>
 </html>
