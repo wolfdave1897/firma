@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hora y Clima - México y Argentina</title>
+    <title>Hora y Clima - México y Chaco, Argentina</title>
     <style>
         * {
             margin: 0;
@@ -56,34 +56,36 @@
     </style>
 
     <script>
+        // Clave de API de TimeZoneDB (puedes obtener una gratuita en https://timezonedb.com/api)
+        const TIMEZONEDB_API_KEY = "TU_API_KEY"; // Reemplaza con tu clave de API
+
         async function getData() {
             try {
-                // API de zona horaria
-                const mexicoTimeRes = await fetch("https://worldtimeapi.org/api/timezone/America/Mexico_City");
-                const chacoTimeRes = await fetch("https://worldtimeapi.org/api/timezone/America/Argentina/Salta");
-
-                // API de clima
-                const mexicoWeatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=19.43&longitude=-99.13&current_weather=true");
-                const chacoWeatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=-27.46&longitude=-58.98&current_weather=true");
-
-                // Convertir respuestas a JSON
+                // Obtener hora y fecha para México
+                const mexicoTimeRes = await fetch(
+                    `https://api.timezonedb.com/v2.1/get-time-zone?key=${TIMEZONEDB_API_KEY}&format=json&by=zone&zone=America/Mexico_City`
+                );
                 const mexicoTime = await mexicoTimeRes.json();
+
+                // Obtener hora y fecha para Chaco, Argentina
+                const chacoTimeRes = await fetch(
+                    `https://api.timezonedb.com/v2.1/get-time-zone?key=${TIMEZONEDB_API_KEY}&format=json&by=zone&zone=America/Argentina/Cordoba` // Chaco usa la zona horaria de Córdoba
+                );
                 const chacoTime = await chacoTimeRes.json();
+
+                // Obtener clima para México
+                const mexicoWeatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=19.43&longitude=-99.13&current_weather=true");
                 const mexicoWeather = await mexicoWeatherRes.json();
+
+                // Obtener clima para Chaco
+                const chacoWeatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=-27.46&longitude=-58.98&current_weather=true");
                 const chacoWeather = await chacoWeatherRes.json();
 
-                // Obtener hora en formato ISO
-                const mexicoFecha = new Date(mexicoTime.utc_datetime);
-                const chacoFecha = new Date(chacoTime.utc_datetime);
+                // Formatear la hora local
+                const mexicoHora = new Date(mexicoTime.formatted).toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+                const chacoHora = new Date(chacoTime.formatted).toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 
-                // Ajustar la diferencia horaria manualmente con el offset
-                mexicoFecha.setSeconds(mexicoFecha.getSeconds() + mexicoTime.raw_offset);
-                chacoFecha.setSeconds(chacoFecha.getSeconds() + chacoTime.raw_offset);
-
-                // Formatear la hora correctamente
-                const mexicoHora = mexicoFecha.toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-                const chacoHora = chacoFecha.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-
+                // Mostrar los datos en la página
                 document.getElementById("mexico").innerHTML = `
                     <h2>Ciudad de México 🇲🇽</h2>
                     <p><strong>Hora:</strong> ${mexicoHora}</p>
@@ -102,7 +104,7 @@
     </script>
 </head>
 <body onload="getData()">
-    <h1>Hora y Clima en México y Argentina</h1>
+    <h1>Hora y Clima en México y Chaco, Argentina</h1>
     <div class="container">
         <div id="mexico" class="box">Cargando...</div>
         <div id="argentina" class="box">Cargando...</div>
