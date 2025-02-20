@@ -39,7 +39,7 @@
             width: 300px;
             padding: 20px;
             border-radius: 10px;
-            color: white;
+            color: black;
             font-size: 1.2rem;
             text-align: center;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
@@ -48,30 +48,41 @@
 
         #mexico {
             background: linear-gradient(to bottom, #006847, #ffffff, #ce1126);
-            color: black;
         }
 
         #argentina {
             background: linear-gradient(to bottom, #74ACDF, #ffffff, #74ACDF);
-            color: black;
         }
     </style>
 
     <script>
         async function getData() {
             try {
+                // API de zona horaria
                 const mexicoTimeRes = await fetch("https://worldtimeapi.org/api/timezone/America/Mexico_City");
                 const chacoTimeRes = await fetch("https://worldtimeapi.org/api/timezone/America/Argentina/Salta");
+
+                // API de clima
                 const mexicoWeatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=19.43&longitude=-99.13&current_weather=true");
                 const chacoWeatherRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=-27.46&longitude=-58.98&current_weather=true");
 
+                // Convertir respuestas a JSON
                 const mexicoTime = await mexicoTimeRes.json();
                 const chacoTime = await chacoTimeRes.json();
                 const mexicoWeather = await mexicoWeatherRes.json();
                 const chacoWeather = await chacoWeatherRes.json();
 
-                const mexicoHora = new Date(mexicoTime.datetime).toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-                const chacoHora = new Date(chacoTime.datetime).toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+                // Obtener hora en formato ISO
+                const mexicoFecha = new Date(mexicoTime.utc_datetime);
+                const chacoFecha = new Date(chacoTime.utc_datetime);
+
+                // Ajustar la diferencia horaria manualmente con el offset
+                mexicoFecha.setSeconds(mexicoFecha.getSeconds() + mexicoTime.raw_offset);
+                chacoFecha.setSeconds(chacoFecha.getSeconds() + chacoTime.raw_offset);
+
+                // Formatear la hora correctamente
+                const mexicoHora = mexicoFecha.toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+                const chacoHora = chacoFecha.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 
                 document.getElementById("mexico").innerHTML = `
                     <h2>Ciudad de México 🇲🇽</h2>
